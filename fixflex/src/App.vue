@@ -85,18 +85,18 @@
 
 #nav {
   padding: 10px;
-  background-color: #000 !important;
+  background-color: #414141 !important;
 
   a {
     font-weight: bold;
     color: #ccc;
     &:hover {
-      color: #fdd835;
+      color: #35aafd;
       text-decoration: none;
     }
     &.router-link-exact-active {
-      border-bottom: 2px solid #fdd835;
-      color: #fdd835;
+      border-bottom: 2px solid #35aafd;
+      color: #35aafd;
     }
   }
 
@@ -104,25 +104,25 @@
     &:active {
       border-color: blue;
     }
-    background-color: #fdd835;
-    border-color: #fdd835;
+    background-color: #35aafd;
+    border-color: #35aafd;
   }
 }
 #logo {
   &:hover {
-    color: #fdd835 !important;
+    color: #35aafd !important;
   }
 }
 
 #search {
-  border-color: #fdd835; // search input outline
+  border-color: #35aafd; // search input outline
 }
 
 #button {
-  color: #fdd835; // "search"
-  border-color: #fdd835; // outline buttona
+  color: #35aafd; // "search"
+  border-color: #35aafd; // outline buttona
   &:hover {
-    background-color: #fdd835 !important; //hover button color, obrub mi smeta..
+    background-color: #35aafd !important; //hover button color, obrub mi smeta..
     color: #000000;
   }
   // &:active {
