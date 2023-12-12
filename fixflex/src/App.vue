@@ -73,3 +73,63 @@
   </nav>
   <router-view />
 </template>
+
+<style lang="scss">
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #000000;
+}
+
+#nav {
+  padding: 10px;
+  background-color: #000 !important;
+
+  a {
+    font-weight: bold;
+    color: #ccc;
+    &:hover {
+      color: #fdd835;
+      text-decoration: none;
+    }
+    &.router-link-exact-active {
+      border-bottom: 2px solid #fdd835;
+      color: #fdd835;
+    }
+  }
+
+  .navbar-toggler {
+    &:active {
+      border-color: blue;
+    }
+    background-color: #fdd835;
+    border-color: #fdd835;
+  }
+}
+#logo {
+  &:hover {
+    color: #fdd835 !important;
+  }
+}
+
+#search {
+  border-color: #fdd835; // search input outline
+}
+
+#button {
+  color: #fdd835; // "search"
+  border-color: #fdd835; // outline buttona
+  &:hover {
+    background-color: #fdd835 !important; //hover button color, obrub mi smeta..
+    color: #000000;
+  }
+  // &:active {
+  //     border-color: #cd0000 !important;
+  //   }
+  // &:focus{
+  //   border-color: ;
+  // }
+}
+</style>
