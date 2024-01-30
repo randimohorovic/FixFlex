@@ -7,7 +7,7 @@
       <Listing-Job v-for="x in listing" :key="x" :info="x" />
       <!-- x element u data- jobs:, key: "x"pozivas vrijednost x el.   -->
     </div>
-    <div class="col-2">empty - blok {{ lista }}</div>
+    <div class="col-2">empty - blok {{ ispis }} {{ lista }}</div>
   </div>
 </template>
 
@@ -17,7 +17,7 @@
 import ListingJob from "@/components/Listing.vue";
 
 let listing = [];
-
+let blok = ["ispis podatka varijable"];
 listing = [
   "https://picsum.photos/id/1/400/400",
   "https://picsum.photos/id/2/400/400",
@@ -31,6 +31,7 @@ export default {
       // kljuc : vrijednost
       // lista : [1,2,3,"four"], // zelim imat podatke koji ce rec koji su dostupni poslovi
       listing: listing,
+      ispis: blok,
     };
   },
   components: {
