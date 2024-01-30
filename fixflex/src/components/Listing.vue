@@ -1,6 +1,6 @@
 <template>
   <div class="card text-center">
-    <div class="card-header">Featured</div>
+    <div class="card-header">Featured {{ info }}</div>
     <div class="card-body p-0"></div>
     <img class="card-img-top" :src="info" />
 
@@ -12,7 +12,7 @@
 import { initCustomFormatter } from "vue";
 
 export default {
-  props: ["info"], // elementi aaraya su nazivi parametra koje vue.js komponenta prima, parametarar "info"
-  name: "ListingJob",
+  props: ["info"], // elementi aaraya su nazivi parametra koje vue.js komponenta prima, parametarar "info" uvijek je naziv props
+  name: "ListingJob", // nije mi potreban data jer mi info folazi iz vana
 };
 </script>

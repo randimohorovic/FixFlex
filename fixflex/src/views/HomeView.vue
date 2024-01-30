@@ -5,7 +5,7 @@
     <div class="col-7">
       <!--  pozivas komponentu listin job  -->
       <Listing-Job v-for="x in listing" :key="x" :info="x" />
-      <!-- x element u data- jobs:, key: "x"pozivas vrijednost x el.   -->
+      <!-- x element u data- jobs:, key: "x"pozivas vrijednost x el. :x to prima javascript taj jednako ako bi bio nesto unique onda.id ili...  -->
     </div>
     <div class="col-2">empty - blok {{ ispis }} {{ lista }}</div>
   </div>
