@@ -52,6 +52,7 @@
       </ul>
       <form class="form-inline my-2 my-lg-0">
         <input
+          v-model="store.searchTerm" 
           id="search"
           class="form-control mr-sm-2"
           type="search"
@@ -69,10 +70,28 @@
     </div>
 
     <!-- <router-link to="/">Home</router-link> 
-  <router-link to="/signup">Signup</router-link> -->
+  <router-link to="/signup">Signup</router-link> 
+store.searchterm jer u storu imam taj objekt -->
   </nav>
+{{ store.searchTerm }} 
   <router-view />
 </template>
+
+<script>
+import store from "@/store";
+// vmodel radi dai treba kada korisnik trazi da mi se prenese ovdje kao objekt
+// tu cu ubacit import  searchterma ali isto tako moram exportat ovu vue komponentu da je mogu koristi u drugim komponentama
+export default {
+  name: "app",
+  data() {
+    return{
+    
+    store : store,
+  }}
+};
+
+
+</script>
 
 <style lang="scss">
 #app {
@@ -81,6 +100,7 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #000000;
+  background-image: url("@/assets/background.jpg") ;
 }
 
 #nav {

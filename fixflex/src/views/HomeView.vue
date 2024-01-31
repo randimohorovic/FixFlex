@@ -4,10 +4,10 @@
     <div class="col-3">filtri/linkovi</div>
     <div class="col-7">
       <!--  pozivas komponentu listin job  -->
-      <Listing-Job v-for="x in listing" :key="x" :info="x" />
+      <Listing-Job v-for="x in  filterListing" :key="x.header" :info="x" />
       <!-- x element u data- jobs:, key: "x"pozivas vrijednost x el. :x to prima javascript taj jednako ako bi bio nesto unique onda.id ili...  -->
     </div>
-    <div class="col-2">empty - blok {{ ispis }} {{ lista }}</div>
+    <div class="col-2">empty - blok {{ ispis }} {{ lista }} {{ store.searchTerm }}</div>
   </div>
 </template>
 
@@ -15,6 +15,7 @@
 // @ is an alias to /src
 //
 import ListingJob from "@/components/Listing.vue";
+import store from "@/store";
 
 let listing = [];
 let blok = ["ispis podatka varijable"];
@@ -40,8 +41,27 @@ export default {
       // lista : [1,2,3,"four"], // zelim imat podatke koji ce rec koji su dostupni poslovi
       listing: listing,
       ispis: blok,
+      store: store,
     };
   },
+  //navodim kao kljuc: objekt (objekt je ) unutra navodim funkcije koje mi sluze za obradu podataka
+              // ili nekakav filter ovih pdatak ue xportu
+  computed: {
+    filterListing(){
+      //logika koja ce filtrirati listings
+      // vracam lisitng koja mi zadovoljava store.searchterm, this. (koristim da pristupim data djelu)
+      let term = this.store.searchTerm;
+      let newListing = [];
+
+      for (let x of this.listing) {
+        if (x.description.indexOf(term) >= 0) {
+          newListing.push(x);
+        }
+      }
+      return newListing;
+    },
+  },
+
   components: {
     ListingJob,
   },
