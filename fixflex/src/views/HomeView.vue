@@ -18,10 +18,18 @@ import ListingJob from "@/components/Listing.vue";
 
 let listing = [];
 let blok = ["ispis podatka varijable"];
+//prosljeduje info o url ali zelim prosljedit info gdje cu slat jedan objekt po objavi posla
 listing = [
-  "https://picsum.photos/id/1/400/400",
-  "https://picsum.photos/id/2/400/400",
-  "https://picsum.photos/id/3/400/400",
+  {header : "Majstor pločica",
+   description : "trazi se radnik (isto iz baze podaci)",
+   time : "iz baze vrijeme "},
+   {header : "Majstor žbuke",
+   description : "trazi se radnik (isto iz baze podaci)#2",
+   time : "iz baze vrijeme "},
+   {header : "Majstor centralnog grijanja",
+   description : "trazi se radnik (isto iz baze podaci)#3",
+   time : "iz baze vrijeme "},
+ 
 ];
 
 export default {
