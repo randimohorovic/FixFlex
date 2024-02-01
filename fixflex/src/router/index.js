@@ -22,7 +22,7 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/Signup.vue"),
   },
-  // new route 
+  // new route
 ];
 
 const router = createRouter({

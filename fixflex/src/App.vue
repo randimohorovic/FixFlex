@@ -15,16 +15,21 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
+        <li class="nav-item">
           <a class="nav-link"> <router-link to="/">Home</router-link> </a>
         </li>
-        <li class="nav-item active">
-          <a class="nav-link"> <router-link to="/login">Login</router-link> </a>
+        <li v-if="!store.currentUser" class="nav-item">
+          <a class="nav-link">
+            <router-link to="/login">Login</router-link>
+          </a>
         </li>
-        <li class="nav-item active">
+        <li v-if="!store.currentUser" class="nav-item">
           <a class="nav-link">
             <router-link to="/signup">Signup</router-link>
           </a>
+        </li>
+        <li v-if="store.currentUser" class="nav-item">
+          <a href="#" @click.prevent="logout()" class="nav-link">Logout</a>
         </li>
         <li class="nav-item dropdown">
           <a
@@ -84,14 +89,40 @@ store.searchterm jer u storu imam taj objekt -->
 
 <script>
 import store from "@/store";
+import { firebase } from "@/firebase.js";
+import router from "@/router";
 // vmodel radi dai treba kada korisnik trazi da mi se prenese ovdje kao objekt
 // tu cu ubacit import  searchterma ali isto tako moram exportat ovu vue komponentu da je mogu koristi u drugim komponentama
+console.log(router);
+firebase.auth().onAuthStateChanged((user) => {
+  if (user) {
+    console.log("*/*", user.email);
+    store.currentUser = user.email;
+  } else {
+    console.log("/*/*", "no user");
+    store.currentUser = null;
+    if (router.name !== "login") {
+      router.push({ name: "login" });
+    }
+  }
+});
+
 export default {
   name: "app",
   data() {
     return {
       store: store,
     };
+  },
+  methods: {
+    logout() {
+      firebase
+        .auth()
+        .signOut()
+        .then(() => {
+          this.$router.push({ name: "login" });
+        });
+    },
   },
 };
 </script>
@@ -103,7 +134,8 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #000000;
-  background-image: url("@/assets/background.jpg");
+  background-color: #a39999;
+  //background-image: url("@/assets/background.jpg");
 }
 
 #nav {

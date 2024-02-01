@@ -55,6 +55,7 @@ export default {
   methods: {
     login() {
       console.log("login.." + this.username);
+      console.log(this.$router);
       // let x = this;
       firebase
         .auth()
