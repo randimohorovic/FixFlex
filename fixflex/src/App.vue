@@ -21,6 +21,9 @@
         <li class="nav-item active">
           <a class="nav-link"> <router-link to="/login">Login</router-link> </a>
         </li>
+        <li class="nav-item active">
+          <a class="nav-link"> <router-link to="/signup">Signup</router-link> </a>
+        </li>
         <li class="nav-item dropdown">
           <a
             class="nav-link dropdown-toggle"
