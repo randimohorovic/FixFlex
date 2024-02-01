@@ -10,6 +10,7 @@
               <label for="exampleInputEmail1">Email address</label>
               <input
                 type="email"
+                v-model="username"
                 class="form-control"
                 id="exampleInputEmail1"
                 aria-describedby="emailHelp"
@@ -24,12 +25,15 @@
               <label for="exampleInputPassword1">Password</label>
               <input
                 type="password"
+                v-model="password"
                 class="form-control"
                 id="exampleInputPassword1"
                 placeholder="Password"
               />
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="button" @click="login()" class="btn btn-primary">
+              Submit
+            </button>
           </form>
         </div>
         <div class="col-sm"></div>
@@ -37,3 +41,35 @@
     </div>
   </div>
 </template>
+<script>
+import { firebase } from "@/firebase.js";
+
+export default {
+  name: "login",
+  data() {
+    return {
+      username: "",
+      password: "",
+    };
+  }, // zarez pazi izmedu atributa uvjek zarez
+  methods: {
+    login() {
+      console.log("login.." + this.username);
+      // let x = this;
+      firebase
+        .auth()
+        .signInWithEmailAndPassword(this.username, this.password)
+        .then(function (result) {
+          console.log("uspiješna prijave", result);
+
+          //nakon sto je uspjesna prijava moramo se prebacit na home
+          // ili arow funckia .then((result) => {console.log(this.$router)})
+          // netreba vise // x.$router.replace({ name: "home" }); //.push pusha nas na novu stranicu pa kad idemo back vracam se na login sto nema smisla, zato koristimo replace
+        })
+        .catch(function (error) {
+          console.log("greska ", error);
+        });
+    },
+  },
+};
+</script>

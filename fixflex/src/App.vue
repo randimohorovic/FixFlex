@@ -22,7 +22,9 @@
           <a class="nav-link"> <router-link to="/login">Login</router-link> </a>
         </li>
         <li class="nav-item active">
-          <a class="nav-link"> <router-link to="/signup">Signup</router-link> </a>
+          <a class="nav-link">
+            <router-link to="/signup">Signup</router-link>
+          </a>
         </li>
         <li class="nav-item dropdown">
           <a
@@ -55,7 +57,7 @@
       </ul>
       <form class="form-inline my-2 my-lg-0">
         <input
-          v-model="store.searchTerm" 
+          v-model="store.searchTerm"
           id="search"
           class="form-control mr-sm-2"
           type="search"
@@ -76,7 +78,7 @@
   <router-link to="/signup">Signup</router-link> 
 store.searchterm jer u storu imam taj objekt -->
   </nav>
-{{ store.searchTerm }} 
+
   <router-view />
 </template>
 
@@ -87,13 +89,11 @@ import store from "@/store";
 export default {
   name: "app",
   data() {
-    return{
-    
-    store : store,
-  }}
+    return {
+      store: store,
+    };
+  },
 };
-
-
 </script>
 
 <style lang="scss">
@@ -103,7 +103,7 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #000000;
-  background-image: url("@/assets/background.jpg") ;
+  background-image: url("@/assets/background.jpg");
 }
 
 #nav {
