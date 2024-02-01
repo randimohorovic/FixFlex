@@ -18,13 +18,13 @@ FixFlex is a web application designed to streamline the process of connecting us
 
 ## Author
 
-- [Randi](https://github.com/your-username)
+- [Randi](https://github.com/randimohorovic)
   - Email: randi.mohorovic@gmail.com
 
 ## Organisation
 - University of Jurja Dobrile Pula
-Software engineering, academic year 2023./2024.
-Mentor: Nikola Tanković (nikola.tankovic@unipu.hr)
+- Software engineering, academic year 2023./2024.
+- Mentor: Nikola Tanković (nikola.tankovic@unipu.hr)
 
 
 
