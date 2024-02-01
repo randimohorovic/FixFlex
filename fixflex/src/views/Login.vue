@@ -59,12 +59,12 @@ export default {
       firebase
         .auth()
         .signInWithEmailAndPassword(this.username, this.password)
-        .then(function (result) {
+        .then((result) => {
           console.log("uspiješna prijave", result);
 
           //nakon sto je uspjesna prijava moramo se prebacit na home
-          // ili arow funckija .then((result) => {console.log(this.$router)})
-          // netreba vise // x.$router.replace({ name: "home" }); //.push pusha nas na novu stranicu pa kad idemo back vracam se na login sto nema smisla, zato koristimo replace
+          this.$router.replace({ name: "home" });
+          // this.$router.replace({ name: "home" }); //.push pusha nas na novu stranicu pa kad idemo back vracam se na login sto nema smisla, zato koristimo replace
         })
         .catch(function (error) {
           console.log("greska ", error);
