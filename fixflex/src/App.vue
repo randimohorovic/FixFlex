@@ -91,27 +91,48 @@ store.searchterm jer u storu imam taj objekt -->
 import store from "@/store";
 import { firebase } from "@/firebase.js";
 import router from "@/router";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 // vmodel radi dai treba kada korisnik trazi da mi se prenese ovdje kao objekt
 // tu cu ubacit import  searchterma ali isto tako moram exportat ovu vue komponentu da je mogu koristi u drugim komponentama
 console.log(router);
+
 firebase.auth().onAuthStateChanged((user) => {
   if (user) {
-    console.log("*/*", user.email);
+    console.log("***", user.email);
     store.currentUser = user.email;
   } else {
-    console.log("/*/*", "no user");
+    console.log("", "no user");
     store.currentUser = null;
     if (router.name !== "login") {
       router.push({ name: "login" });
     }
   }
 });
+/* const auth = getAuth();
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    console.log("provjera stanja", user.email);
+    store.currentUser = user.email;
+    // User is signed in, see docs for a list of available properties
+    // https://firebase.google.com/docs/reference/js/auth.user
+    const uid = user.uid;
+    // ...
+  } else {
+    console.log("", "no user");
+    store.currentUser = null;
+    if (router.name !== "login") {
+      router.push({ name: "login" });
+      // User is signed out
+      // ...
+    }
+  }
+}); */
 
 export default {
   name: "app",
   data() {
     return {
-      store: store,
+      store,
     };
   },
   methods: {
@@ -120,6 +141,7 @@ export default {
         .auth()
         .signOut()
         .then(() => {
+          store.currentUser = null;
           this.$router.push({ name: "login" });
         });
     },

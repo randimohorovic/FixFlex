@@ -31,8 +31,16 @@
                 placeholder="Password"
               />
             </div>
+            <div class="col-sm-16">
+              Nemate račun?
+              <a class="nav-link">
+                <router-link to="/signup" style="text-decoration: underline"
+                  >Registrirajte se</router-link
+                >
+              </a>
+            </div>
             <button type="button" @click="login()" class="btn btn-primary">
-              Submit
+              Prijava
             </button>
           </form>
         </div>
