@@ -108,6 +108,7 @@ export default {
           console.log("spremljeno", doc);
           this.postHeader = "";
           this.postDescription = "";
+          alert("Uspješna objava");
         })
         .catch((e) => {
           console.error(e);
