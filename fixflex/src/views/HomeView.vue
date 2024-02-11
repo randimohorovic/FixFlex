@@ -30,7 +30,7 @@
         </form>
       </div>
       <!--  pozivas komponentu listin job  -->
-      <Listing-Job v-for="x in filterListing" :key="x.header" :info="x" />
+      <Listing-Job v-for="x in filterListing" :key="x.id" :info="x" />
       <!-- x element u data- jobs:, key: "x"pozivas vrijednost x el. :x to prima javascript taj jednako ako bi bio nesto unique onda.id ili...  -->
     </div>
     <div class="col-2">empty - blok {{ ispis }} {{ store.searchTerm }}</div>
@@ -47,7 +47,8 @@ import { db } from "@/firebase.js";
 let listing = [];
 let blok = ["ispis podatka varijable"];
 //prosljeduje info o url ali zelim prosljedit info gdje cu slat jedan objekt po objavi posla
-listing = [
+
+/* listing = [
   {
     header: "Majstor pločica",
     description: "trazi se radnik (isto iz baze podaci)",
@@ -73,7 +74,7 @@ listing = [
     description: "trazi se radnik (isto iz baze podaci)#2",
     time: "iz baze vrijeme ",
   },
-];
+]; */
 
 export default {
   name: "HomeView",
@@ -81,16 +82,45 @@ export default {
     return {
       // kljuc : vrijednost
       // lista : [1,2,3,"four"], // zelim imat podatke koji ce rec koji su dostupni poslovi
-      listing: listing,
+      listing: [],
       ispis: blok,
       store: store,
       postHeader: "",
       postDescription: "",
     };
   },
+
+  mounted() {
+    console.log("mounted");
+    //dohvat firebase dokumenta ali iz metode
+    this.getposts();
+  },
+
   //navodim kao kljuc: objekt (objekt je ) unutra navodim funkcije koje mi sluze za obradu podataka
   // ili nekakav filter ovih pdatak ue xportu
   methods: {
+    getposts() {
+      // da prilikom uploada brisanja... mi se osvjeze objave
+      console.log("getposts");
+
+      db.collection("posts")
+        .orderBy("posted_at", "desc") //poredak
+        .get()
+        .then((querry) => {
+          this.listing = [];
+          querry.forEach((doc) => {
+            const data = doc.data();
+
+            this.listing.push({
+              id: doc.id,
+              header: data.header,
+              description: data.desc,
+              time: data.posted_at,
+            });
+          });
+        });
+    },
+
     postNewPost() {
       console.log("ok");
 
@@ -109,6 +139,7 @@ export default {
           this.postHeader = "";
           this.postDescription = "";
           alert("Uspješna objava");
+          this.getposts();
         })
         .catch((e) => {
           console.error(e);
