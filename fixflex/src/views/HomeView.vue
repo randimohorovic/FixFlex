@@ -106,6 +106,8 @@ export default {
         })
         .then((doc) => {
           console.log("spremljeno", doc);
+          this.postHeader = "";
+          this.postDescription = "";
         })
         .catch((e) => {
           console.error(e);
