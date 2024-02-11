@@ -3,6 +3,32 @@
   <div class="row">
     <div class="col-3">filtri/linkovi</div>
     <div class="col-7">
+      <div class="container mt-5">
+        <h2>Nova objava</h2>
+        <form @submit.prevent="postNewPost">
+          <div class="form-group">
+            <label for="postName">Naslov:</label>
+            <input
+              v-model="postHeader"
+              type="text"
+              class="form-control"
+              id="postName"
+              placeholder="Upišite naslov"
+            />
+          </div>
+          <div class="form-group">
+            <label for="postDescription">Opis:</label>
+            <input
+              v-model="postDescription"
+              class="form-control"
+              id="postDescription"
+              rows="3"
+              placeholder="Upišite opis"
+            />
+          </div>
+          <button type="submit" class="btn btn-primary">Objavi</button>
+        </form>
+      </div>
       <!--  pozivas komponentu listin job  -->
       <Listing-Job v-for="x in filterListing" :key="x.header" :info="x" />
       <!-- x element u data- jobs:, key: "x"pozivas vrijednost x el. :x to prima javascript taj jednako ako bi bio nesto unique onda.id ili...  -->
@@ -16,6 +42,7 @@
 //
 import ListingJob from "@/components/Listing.vue";
 import store from "@/store";
+import { db } from "@/firebase.js";
 
 let listing = [];
 let blok = ["ispis podatka varijable"];
@@ -46,16 +73,6 @@ listing = [
     description: "trazi se radnik (isto iz baze podaci)#2",
     time: "iz baze vrijeme ",
   },
-  {
-    header: "Majstor centralnog grijanja",
-    description: "trazi se radnik (isto iz baze podaci)#3",
-    time: "iz baze vrijeme ",
-  },
-  {
-    header: "Majstor centralnog grijanja",
-    description: "trazi se radnik (isto iz baze podaci)#3",
-    time: "iz baze vrijeme ",
-  },
 ];
 
 export default {
@@ -67,10 +84,34 @@ export default {
       listing: listing,
       ispis: blok,
       store: store,
+      postHeader: "",
+      postDescription: "",
     };
   },
   //navodim kao kljuc: objekt (objekt je ) unutra navodim funkcije koje mi sluze za obradu podataka
   // ili nekakav filter ovih pdatak ue xportu
+  methods: {
+    postNewPost() {
+      console.log("ok");
+
+      const postHeader = this.postHeader;
+      const postDescription = this.postDescription;
+
+      db.collection("posts")
+        .add({
+          header: postHeader,
+          desc: postDescription,
+          user: store.currentUser,
+          posted_at: Date.now(), //postoji u js bez imprtanja
+        })
+        .then((doc) => {
+          console.log("spremljeno", doc);
+        })
+        .catch((e) => {
+          console.error(e);
+        });
+    },
+  },
   computed: {
     filterListing() {
       //logika koja ce filtrirati listings
