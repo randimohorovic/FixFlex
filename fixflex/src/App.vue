@@ -156,13 +156,13 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #000000;
-  background-color: #a39999;
+  background-color: #2E3234;
   //background-image: url("@/assets/background.jpg");
 }
 
 #nav {
   padding: 10px;
-  background-color: #414141 !important;
+  background-color: #191B1C !important;
 
   a {
     font-weight: bold;

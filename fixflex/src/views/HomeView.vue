@@ -8,7 +8,7 @@
         <form @submit.prevent="postNewPost">
           <div class="form-group">
             <label for="postName">Naslov:</label>
-            <input
+            <input 
               v-model="postHeader"
               type="text"
               class="form-control"
@@ -16,7 +16,7 @@
               placeholder="Upišite naslov"
             />
           </div>
-          <div class="form-group">
+          <div  class="form-group">
             <label for="postDescription">Opis:</label>
             <input
               v-model="postDescription"
@@ -28,12 +28,12 @@
           </div>
           <button type="submit" class="btn btn-primary">Objavi</button>
         </form>
-      </div>
+      </div >
       <!--  pozivas komponentu listin job  -->
-      <Listing-Job v-for="x in filterListing" :key="x.id" :info="x" />
+      <Listing-Job id ="ispis" v-for="x in filterListing" :key="x.id" :info="x" />
       <!-- x element u data- jobs:, key: "x"pozivas vrijednost x el. :x to prima javascript taj jednako ako bi bio nesto unique onda.id ili...  -->
     </div>
-    <div class="col-2">empty - blok {{ ispis }} {{ store.searchTerm }}</div>
+    <div   class="col-2">empty - blok {{ ispis }} {{ store.searchTerm }}</div>
   </div>
 </template>
 
@@ -167,3 +167,21 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+
+#postName {
+  background-color: #101213 ;
+}
+
+#postDescription {
+  background-color: #101213 ;
+}
+
+#ispis {
+  background-color: #101213 ;
+  color: #6C757D;
+  border-color: #6C757D;
+  border-bottom: 2px solid #6C757D;
+}
+</style>
