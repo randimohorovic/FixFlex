@@ -77,6 +77,7 @@ export default {
         })
         .catch(function (error) {
           console.log("greska ", error);
+          alert("Krivi podaci!");
         });
     },
   },
