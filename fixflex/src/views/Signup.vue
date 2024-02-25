@@ -86,9 +86,11 @@ export default {
         .createUserWithEmailAndPassword(this.username, this.password)
         .then(function () {
           console.log("uspjesna registracija");
+          alert("Uspješna registracija!");
         })
         .catch(function (error) {
           console.error("doslo je do greske", error);
+          alert("Krivi podaci!");
         });
       console.log("nastavak");
     },
