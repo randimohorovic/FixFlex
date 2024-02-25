@@ -207,7 +207,7 @@ div.user-box input {
   border-radius: 10px;
   float: right;
   background-color: transparent;
-  &.hover {
+  &:hover {
     background: #35aafd;
     color: black;
     border-radius: 5px;

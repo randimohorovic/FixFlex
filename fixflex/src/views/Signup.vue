@@ -40,10 +40,8 @@
           </div>
           <div class="row1">
             <div class="col-sm-8">
-              Nemate račun?
-              <a href="/signup" style="text-decoration: underline"
-                >Registrirajte se</a
-              >
+              Imate račun?
+              <a href="/login" style="text-decoration: underline">Prijavi se</a>
             </div>
             <div class="col-sm-4">
               <button
@@ -215,7 +213,7 @@ div.user-box input {
   border-radius: 10px;
   float: right;
   background-color: transparent;
-  &.hover {
+  &:hover {
     background: #35aafd;
     color: black;
     border-radius: 5px;
