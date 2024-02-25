@@ -74,6 +74,7 @@ export default {
         .signInWithEmailAndPassword(this.username, this.password)
         .then((result) => {
           console.log("uspiješna prijave", result);
+          alert("Uspiješna prijava!");
 
           //nakon sto je uspjesna prijava moramo se prebacit na home
           this.$router.replace({ name: "home" });
