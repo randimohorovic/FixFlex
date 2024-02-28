@@ -55,6 +55,7 @@
 </template>
 <script>
 import { firebase } from "@/firebase.js";
+import store from "@/store";
 
 export default {
   name: "login",
@@ -74,10 +75,11 @@ export default {
         .signInWithEmailAndPassword(this.username, this.password)
         .then((result) => {
           console.log("uspiješna prijave", result);
-          alert("Uspiješna prijava!");
+          alert("Uspiješna prijava!  " + this.username);
 
           //nakon sto je uspjesna prijava moramo se prebacit na home
           this.$router.replace({ name: "home" });
+
           // this.$router.replace({ name: "home" }); //.push pusha nas na novu stranicu pa kad idemo back vracam se na login sto nema smisla, zato koristimo replace
         })
         .catch(function (error) {

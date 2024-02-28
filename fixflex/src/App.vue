@@ -56,7 +56,9 @@
             href="#"
             tabindex="-1"
             aria-disabled="true"
-            >Disabled</a
+            v-if="store.currentUser"
+          >
+            {{ name }}</a
           >
         </li>
       </ul>
@@ -92,17 +94,21 @@ import store from "@/store";
 import { firebase } from "@/firebase.js";
 import router from "@/router";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+
 // vmodel radi dai treba kada korisnik trazi da mi se prenese ovdje kao objekt
 // tu cu ubacit import  searchterma ali isto tako moram exportat ovu vue komponentu da je mogu koristi u drugim komponentama
 console.log(router);
 
+const auth = getAuth();
 firebase.auth().onAuthStateChanged((user) => {
   if (user) {
-    console.log("***", user.email);
+    console.log("User logged in with", user.email);
     store.currentUser = user.email;
+    store.searchTerm = "l";
   } else {
-    console.log("", "no user");
+    console.log("user logged out");
     store.currentUser = null;
+    store.searchTerm = "ll";
     if (router.name !== "login") {
       router.push({ name: "login" });
     }
@@ -133,6 +139,7 @@ export default {
   data() {
     return {
       store,
+      name: store.currentUser,
     };
   },
   methods: {
