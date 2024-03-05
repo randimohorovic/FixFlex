@@ -3,9 +3,13 @@
   <div class="row">
     <div class="col-3">filtri/linkovi</div>
     <div class="col-7">
-      <div class="container mt-5">
-        <h2>Nova objava</h2>
-        <button @click="showNewPostDialog" class="btn btn-primary">
+      <div class="container mt-5 new-post-button">
+        <!-- <h2>Nova objava</h2> -->
+        <button
+          @click="showNewPostDialog"
+          type="button"
+          class="btn btn-primary"
+        >
           Nova objava
         </button>
       </div>
@@ -13,13 +17,13 @@
       <!-- Modal for new post -->
       <div
         v-if="showModal"
-        class="modal"
+        class="modal show"
         tabindex="-1"
         role="dialog"
         style="display: block"
       >
         <div class="modal-dialog" role="document">
-          <div class="modal-content">
+          <div id="mod" class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title">Nova objava</h5>
               <button type="button" class="close" @click="hideNewPostDialog">
@@ -29,7 +33,7 @@
             <div class="modal-body">
               <form @submit.prevent="postNewPost">
                 <div class="form-group">
-                  <label for="postName">Naslov:</label>
+                  <label for="postName"></label>
                   <input
                     v-model="postHeader"
                     type="text"
@@ -39,7 +43,7 @@
                   />
                 </div>
                 <div class="form-group">
-                  <label for="postDescription">Opis:</label>
+                  <label for="postDescription"></label>
                   <input
                     v-model="postDescription"
                     class="form-control"
@@ -223,24 +227,32 @@ export default {
   border-bottom: 2px solid #0f1011;
 }
 .modal-background {
-  background-color: rgba(0, 0, 0, 0.5); /* Dark semi-transparent background */
+  background-color: rgba(0, 0, 0, 0.5);
   display: flex;
-  justify-content: center; /* Center horizontally */
-  align-items: center; /* Center vertically */
+  justify-content: center; /* centiranje horizontalno */
+  align-items: center; /* centiranje vertikalno */
 }
 .modal {
-  background-color: #191b1c; /* Background color similar to the login form */
+  top: 150px; /* pozicija more down inline with the posts */
+  background-color: #191b1c;
   padding: 40px;
   border-radius: 10px;
   box-shadow: 0px 40px 25px rgba(0, 0, 0, 0.8); /* Shadow effect */
   max-width: 500px;
   width: 100%;
   box-sizing: border-box;
+  transition: opacity 0.3s ease, transform 0.3s ease; /* Add transition for opacity and transform */
+  opacity: 0; /* Initially hide the modal */
+  transform: translateY(-50px); /* Move the modal up initially */
+}
+.modal.show {
+  opacity: 1; /* Show the modal */
+  transform: translateY(0); /* Move the modal down */
 }
 .modal h2 {
   margin: 0 0 30px;
   padding: 0;
-  color: #fff; /* Text color */
+  color: #fff; /* Text color for my input in modal */
   text-align: center;
 }
 .modal .form-group {
@@ -255,8 +267,8 @@ export default {
   border: none;
   background: transparent;
   text-decoration: none;
-  border-bottom: 2px dashed #35aafd; /* Bottom border color */
-  color: #fff; /* Text color */
+  border-bottom: 3px dashed #35aafd; /* Bottom border color for input might change ? */
+  color: #35aafd; /* Text color */
 }
 .modal input:focus ~ label,
 .modal input:valid ~ label {
@@ -264,37 +276,43 @@ export default {
   color: #35aafd;
   font-size: 15px;
 }
+
+.modal.show {
+  opacity: 1;
+}
 .modal label {
   position: absolute;
-  top: 0;
+  /* top: 0; */
   left: 0;
-  padding: 5px 0;
+  padding: -5px 0;
   font-size: 18px;
-  color: #fff; /* Text color */
+  color: #35aafd;
+  pointer-events: none; /* Disable pointer events for the label */
+  transition: top 0.3s, font-size 0.3s; /* Add transition for smooth animation */
 }
 .modal button {
   position: relative;
   display: inline-block;
   padding: 10px 20px;
-  color: #35aafd; /* Text color */
+  color: #35aafd;
   background-color: #101213 !important;
   font-size: 16px;
   text-decoration: none;
   overflow: hidden;
   transition: 0.5s;
   letter-spacing: 3px;
-  border: 1px solid #35aafd; /* Border color */
+  border: 1px solid #35aafd;
   border-radius: 10px;
   float: right;
   background-color: transparent;
 }
 .modal button:hover {
-  background: #35aafd; /* Button background color on hoverr i think */
-  color: #000; /* Text color on hover */
+  background: #35aafd !important; /* Button background color on hoverr i think */
+  color: #000; /* Text color on hover for the change */
   border-radius: 5px;
 }
 .modal a {
-  color: #35aafd; /* Link color */
+  color: #35aafd; /* Link color needs better integration */
   text-decoration: underline;
 }
 .modal a:hover {
@@ -307,6 +325,29 @@ export default {
 }
 .modal .row1 .col-sm-8 {
   margin: auto; /* Center horizontally */
+}
+
+/* nova objava button  */
+.new-post-button {
+  margin-bottom: 20px; /* Add margin at the bottom to separate it from the posts */
+}
+
+.new-post-button button {
+  background-color: #35aafd; /* Button background color */
+  color: #fff; /* Text color */
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer; /* kursor stil might change it */
+}
+
+.new-post-button button:hover {
+  background-color: #1e90ff;
+}
+#mod {
+  background-color: #191b1c;
+  color: #1e90ff;
 }
 </style>
 #101213
