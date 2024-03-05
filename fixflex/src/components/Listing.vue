@@ -11,7 +11,6 @@
 </template>
 
 <script>
-import { initCustomFormatter } from "vue";
 import moment from "moment";
 
 export default {

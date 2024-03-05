@@ -5,30 +5,56 @@
     <div class="col-7">
       <div class="container mt-5">
         <h2>Nova objava</h2>
-        <form @submit.prevent="postNewPost">
-          <div class="form-group">
-            <label for="postName">Naslov:</label>
-            <input
-              v-model="postHeader"
-              type="text"
-              class="form-control"
-              id="postName"
-              placeholder="Upišite naslov"
-            />
-          </div>
-          <div class="form-group">
-            <label for="postDescription">Opis:</label>
-            <input
-              v-model="postDescription"
-              class="form-control"
-              id="postDescription"
-              rows="3"
-              placeholder="Upišite opis"
-            />
-          </div>
-          <button type="submit" class="btn btn-primary">Objavi</button>
-        </form>
+        <button @click="showNewPostDialog" class="btn btn-primary">
+          Nova objava
+        </button>
       </div>
+
+      <!-- Modal for new post -->
+      <div
+        v-if="showModal"
+        class="modal"
+        tabindex="-1"
+        role="dialog"
+        style="display: block"
+      >
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Nova objava</h5>
+              <button type="button" class="close" @click="hideNewPostDialog">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form @submit.prevent="postNewPost">
+                <div class="form-group">
+                  <label for="postName">Naslov:</label>
+                  <input
+                    v-model="postHeader"
+                    type="text"
+                    class="form-control"
+                    id="postName"
+                    placeholder="Upišite naslov"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="postDescription">Opis:</label>
+                  <input
+                    v-model="postDescription"
+                    class="form-control"
+                    id="postDescription"
+                    rows="3"
+                    placeholder="Upišite opis"
+                  />
+                </div>
+                <button type="submit" class="btn btn-primary">Objavi</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!--  pozivas komponentu listin job  -->
       <Listing-Job
         id="ispis"
@@ -49,7 +75,6 @@ import ListingJob from "@/components/Listing.vue";
 import store from "@/store";
 import { db } from "@/firebase.js";
 
-let listing = [];
 let blok = ["ispis podatka varijable"];
 //prosljeduje info o url ali zelim prosljedit info gdje cu slat jedan objekt po objavi posla
 
@@ -92,6 +117,7 @@ export default {
       store: store,
       postHeader: "",
       postDescription: "",
+      showModal: false,
     };
   },
 
@@ -122,6 +148,7 @@ export default {
               description: data.desc,
               time: data.posted_at,
             });
+            console.log("id", doc.id);
           });
         });
     },
@@ -145,10 +172,17 @@ export default {
           this.postDescription = "";
           alert("Uspješna objava");
           this.getposts();
+          this.hideNewPostDialog(); // Close the modal after posting
         })
         .catch((e) => {
           console.error(e);
         });
+    },
+    showNewPostDialog() {
+      this.showModal = true;
+    },
+    hideNewPostDialog() {
+      this.showModal = false;
     },
   },
   computed: {
@@ -185,7 +219,63 @@ export default {
 #ispis {
   background-color: #101213;
   color: #6c757d;
-  border-color: #6c757d;
-  border-bottom: 2px solid #6c757d;
+  border-color: #323639;
+  border-bottom: 2px solid #0f1011;
+}
+.modal-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Dark semi-transparent background */
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+}
+
+.modal {
+  background-color: #fff; /* White background for the modal */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5); /* Shadow effect */
+  max-width: 400px;
+  width: 100%;
+  margin-top: 190px; /* Add margin to center it a bit lower */
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.modal-header .modal-title {
+  font-size: 20px;
+}
+
+.modal-body .form-group {
+  margin-bottom: 20px;
+}
+
+.modal-body .form-group label {
+  font-weight: bold;
+}
+
+.modal-body .form-control {
+  width: 100%;
+}
+
+.modal-body button {
+  width: 100%;
+}
+
+.close {
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: #000;
 }
 </style>
