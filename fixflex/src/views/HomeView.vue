@@ -223,59 +223,90 @@ export default {
   border-bottom: 2px solid #0f1011;
 }
 .modal-background {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
   background-color: rgba(0, 0, 0, 0.5); /* Dark semi-transparent background */
   display: flex;
   justify-content: center; /* Center horizontally */
   align-items: center; /* Center vertically */
 }
-
 .modal {
-  background-color: #fff; /* White background for the modal */
-  padding: 20px;
+  background-color: #191b1c; /* Background color similar to the login form */
+  padding: 40px;
   border-radius: 10px;
-  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5); /* Shadow effect */
-  max-width: 400px;
+  box-shadow: 0px 40px 25px rgba(0, 0, 0, 0.8); /* Shadow effect */
+  max-width: 500px;
   width: 100%;
-  margin-top: 190px; /* Add margin to center it a bit lower */
+  box-sizing: border-box;
 }
-
-.modal-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
+.modal h2 {
+  margin: 0 0 30px;
+  padding: 0;
+  color: #fff; /* Text color */
+  text-align: center;
 }
-
-.modal-header .modal-title {
-  font-size: 20px;
+.modal .form-group {
+  position: relative;
+  margin-bottom: 45px;
 }
-
-.modal-body .form-group {
-  margin-bottom: 20px;
-}
-
-.modal-body .form-group label {
-  font-weight: bold;
-}
-
-.modal-body .form-control {
+.modal input {
+  padding: 15px 0;
+  font-size: 18px;
+  font-family: Avenir, Helvetica, Arial, sans-serif;
   width: 100%;
-}
-
-.modal-body button {
-  width: 100%;
-}
-
-.close {
-  cursor: pointer;
-  background: none;
   border: none;
-  font-size: 24px;
-  color: #000;
+  background: transparent;
+  text-decoration: none;
+  border-bottom: 2px dashed #35aafd; /* Bottom border color */
+  color: #fff; /* Text color */
+}
+.modal input:focus ~ label,
+.modal input:valid ~ label {
+  top: -20px;
+  color: #35aafd;
+  font-size: 15px;
+}
+.modal label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 5px 0;
+  font-size: 18px;
+  color: #fff; /* Text color */
+}
+.modal button {
+  position: relative;
+  display: inline-block;
+  padding: 10px 20px;
+  color: #35aafd; /* Text color */
+  background-color: #101213 !important;
+  font-size: 16px;
+  text-decoration: none;
+  overflow: hidden;
+  transition: 0.5s;
+  letter-spacing: 3px;
+  border: 1px solid #35aafd; /* Border color */
+  border-radius: 10px;
+  float: right;
+  background-color: transparent;
+}
+.modal button:hover {
+  background: #35aafd; /* Button background color on hoverr i think */
+  color: #000; /* Text color on hover */
+  border-radius: 5px;
+}
+.modal a {
+  color: #35aafd; /* Link color */
+  text-decoration: underline;
+}
+.modal a:hover {
+  text-decoration: none;
+}
+.modal .row1 {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+}
+.modal .row1 .col-sm-8 {
+  margin: auto; /* Center horizontally */
 }
 </style>
+#101213
