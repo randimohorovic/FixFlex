@@ -14,12 +14,23 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/Login.vue"),
   },
+
   {
     path: "/signup",
     name: "signup",
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/Signup.vue"),
   },
+  {
+    path: "/edit-profile",
+    name: "EditProfile",
+    // Lazy load UserProfileEdit view
+    component: () =>
+      import(
+        /* webpackChunkName: "editProfile" */ "../views/UserProfileEdit.vue"
+      ),
+  },
+
   // new route
 ];
 

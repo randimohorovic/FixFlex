@@ -10,7 +10,7 @@
           type="button"
           class="btn btn-primary"
         >
-          Nova objava
+          New post
         </button>
       </div>
 
@@ -65,6 +65,7 @@
         v-for="x in filterListing"
         :key="x.id"
         :info="x"
+        @update-rating="handleUpdateRating"
       />
       <!-- x element u data- jobs:, key: "x"pozivas vrijednost x el. :x to prima javascript taj jednako ako bi bio nesto unique onda.id ili...  -->
     </div>
@@ -151,6 +152,11 @@ export default {
               header: data.header,
               description: data.desc,
               time: data.posted_at,
+              userEmail: data.user,
+              rating: data.rating || 0, // Include the rating, defaulting to 0 if not set
+              ratingsSum: data.ratingsSum || 0,
+              ratingsCount: data.ratingsCount || 0,
+              username: username, // Add the fetched username
             });
             console.log("id", doc.id);
           });
@@ -162,13 +168,19 @@ export default {
 
       const postHeader = this.postHeader;
       const postDescription = this.postDescription;
+      const userEmail = this.store.currentUser;
+      const defaultRating = 0; // Default rating value
 
       db.collection("posts")
         .add({
           header: postHeader,
           desc: postDescription,
+          userEmail: userEmail,
           user: store.currentUser,
           posted_at: Date.now(), //postoji u js bez imprtanja
+          rating: defaultRating, // Include the rating when creating a new post
+          ratingsSum: 0, // suma ratinga
+          ratingsCount: 0, // broj ratinga oderedenog posta
         })
         .then((doc) => {
           console.log("spremljeno", doc);
@@ -176,7 +188,7 @@ export default {
           this.postDescription = "";
           alert("Uspješna objava");
           this.getposts();
-          this.hideNewPostDialog(); // Close the modal after posting
+          this.hideNewPostDialog(); // Closes the modal after posting
         })
         .catch((e) => {
           console.error(e);
@@ -187,6 +199,32 @@ export default {
     },
     hideNewPostDialog() {
       this.showModal = false;
+    },
+    handleUpdateRating({ postId, rating }) {
+      const postRef = db.collection("posts").doc(postId);
+
+      db.runTransaction((transaction) => {
+        return transaction.get(postRef).then((doc) => {
+          if (!doc.exists) {
+            throw "Document does not exist!";
+          }
+          const data = doc.data();
+          const newSum = (data.ratingsSum || 0) + rating;
+          const newCount = (data.ratingsCount || 0) + 1;
+
+          transaction.update(postRef, {
+            ratingsSum: newSum,
+            ratingsCount: newCount,
+          });
+        });
+      })
+        .then(() => {
+          console.log("Rating updated successfully.");
+          this.getposts(); //refresh posts from the database
+        })
+        .catch((error) => {
+          console.error("Transaction failed: ", error);
+        });
     },
   },
   computed: {
@@ -237,22 +275,22 @@ export default {
   background-color: #191b1c;
   padding: 40px;
   border-radius: 10px;
-  box-shadow: 0px 40px 25px rgba(0, 0, 0, 0.8); /* Shadow effect */
+  box-shadow: 0px 40px 25px rgba(0, 0, 0, 0.8); /* shadow effect */
   max-width: 500px;
   width: 100%;
   box-sizing: border-box;
-  transition: opacity 0.3s ease, transform 0.3s ease; /* Add transition for opacity and transform */
-  opacity: 0; /* Initially hide the modal */
+  transition: opacity 0.3s ease, transform 0.3s ease; /* add transition for opacity and transform */
+  opacity: 0; /* initially hide the modal */
   transform: translateY(-50px); /* Move the modal up initially */
 }
 .modal.show {
-  opacity: 1; /* Show the modal */
-  transform: translateY(0); /* Move the modal down */
+  opacity: 1; /* pokazuje modal */
+  transform: translateY(0); /* pomak dole */
 }
 .modal h2 {
   margin: 0 0 30px;
   padding: 0;
-  color: #fff; /* Text color for my input in modal */
+  color: #fff; /* text color for my input in modal */
   text-align: center;
 }
 .modal .form-group {
@@ -350,4 +388,3 @@ export default {
   color: #1e90ff;
 }
 </style>
-#101213

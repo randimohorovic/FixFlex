@@ -104,6 +104,7 @@ firebase.auth().onAuthStateChanged((user) => {
   if (user) {
     console.log("User logged in with", user.email);
     store.currentUser = user.email;
+
     store.searchTerm = "l";
   } else {
     console.log("user logged out");
