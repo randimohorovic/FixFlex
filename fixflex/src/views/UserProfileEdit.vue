@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import { db } from "@/firebase.js"; // Your Firebase config file
+import { db } from "@/firebase.js";
 import { firebase } from "@/firebase.js";
 import "firebase/auth";
 

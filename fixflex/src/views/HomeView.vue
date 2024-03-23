@@ -79,6 +79,7 @@
 import ListingJob from "@/components/Listing.vue";
 import store from "@/store";
 import { db } from "@/firebase.js";
+import { firebase } from "@/firebase.js";
 
 let blok = ["ispis podatka varijable"];
 //prosljeduje info o url ali zelim prosljedit info gdje cu slat jedan objekt po objavi posla
@@ -136,15 +137,14 @@ export default {
   // ili nekakav filter ovih pdatak ue xportu
   methods: {
     getposts() {
-      // da prilikom uploada brisanja... mi se osvjeze objave
       console.log("getposts");
 
       db.collection("posts")
-        .orderBy("posted_at", "desc") //poredak
+        .orderBy("posted_at", "desc")
         .get()
-        .then((querry) => {
+        .then((query) => {
           this.listing = [];
-          querry.forEach((doc) => {
+          query.forEach((doc) => {
             const data = doc.data();
 
             this.listing.push({
@@ -152,18 +152,71 @@ export default {
               header: data.header,
               description: data.desc,
               time: data.posted_at,
-              userEmail: data.user,
-              rating: data.rating || 0, // Include the rating, defaulting to 0 if not set
+              userEmail: data.userEmail, // Assuming the correct field name is userEmail
+              rating: data.rating || 0,
               ratingsSum: data.ratingsSum || 0,
               ratingsCount: data.ratingsCount || 0,
-              username: username, // Add the fetched username
+              username: data.username, // Ensure this field is included in your documents
             });
-            console.log("id", doc.id);
           });
         });
     },
 
     postNewPost() {
+      console.log("ok");
+
+      const user = firebase.auth().currentUser; // Get the current user
+      if (!user) {
+        console.error("No user signed in.");
+        return;
+      }
+
+      // dohavtim username is userprofile kolekcije zatim..
+      db.collection("userProfiles")
+        .doc(user.uid)
+        .get()
+        .then((doc) => {
+          if (doc.exists) {
+            const username = doc.data().username; // ako imam username filed naravno
+
+            // kreira m post sa username i ostlaim pdaocima
+            const postHeader = this.postHeader;
+            const postDescription = this.postDescription;
+            const userEmail = user.email;
+            const defaultRating = 0;
+
+            db.collection("posts")
+              .add({
+                header: postHeader,
+                desc: postDescription,
+                userEmail: userEmail,
+                username: username,
+                posted_at: Date.now(),
+                rating: defaultRating,
+                ratingsSum: 0,
+                ratingsCount: 0,
+              })
+              .then((docRef) => {
+                console.log("Post saved successfully", docRef.id);
+                this.postHeader = "";
+                this.postDescription = "";
+                alert("Successful post!");
+                this.getposts(); // refresham cjelu listu posta
+                this.hideNewPostDialog();
+              })
+              .catch((e) => {
+                console.error("Error creating post:", e);
+              });
+          } else {
+            console.error("User profile does not exist.");
+          }
+        })
+        .catch((error) => {
+          console.error("Error fetching user profile:", error);
+        });
+    },
+
+    /* postNewPost() {
       console.log("ok");
 
       const postHeader = this.postHeader;
@@ -193,7 +246,7 @@ export default {
         .catch((e) => {
           console.error(e);
         });
-    },
+    }, */
     showNewPostDialog() {
       this.showModal = true;
     },
@@ -325,8 +378,8 @@ export default {
   padding: -5px 0;
   font-size: 18px;
   color: #35aafd;
-  pointer-events: none; /* Disable pointer events for the label */
-  transition: top 0.3s, font-size 0.3s; /* Add transition for smooth animation */
+  pointer-events: none;
+  transition: top 0.3s, font-size 0.3s; /* tranzicija za animaciju, ne radi .?? */
 }
 .modal button {
   position: relative;
@@ -345,7 +398,7 @@ export default {
   background-color: transparent;
 }
 .modal button:hover {
-  background: #35aafd !important; /* Button background color on hoverr i think */
+  background: #35aafd !important; /* button background color on hoverr woow */
   color: #000; /* Text color on hover for the change */
   border-radius: 5px;
 }

@@ -5,8 +5,9 @@
       <h5 class="card-title left-align">{{ info.header }}</h5>
       <p class="date-posted left-align"></p>
       <p class="card-text left-align">{{ info.description }}</p>
-      <p class="posted-by right-align">Posted by: {{ info.userEmail }}</p>
-      <p class="posted-by right-align">Posted by: {{ averageRating }}</p>
+      <p class="posted-by right-align">Posted by: {{ info.username }}</p>
+      <p class="posted-by right-align">Rating: {{ averageRating }}</p>
+      <p class="posted-by right-align">User email: {{ info.userEmail }}</p>
       <StarRating
         :initialRating="info.rating"
         @rating-selected="handleRatingSelected"
@@ -90,29 +91,29 @@ export default {
 .card-footer {
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
-  text-align: right; /* Align the footer content to the right */
+  text-align: right;
 }
 
 .card-body {
   padding: 20px;
-  text-align: left; /* Aligns content to the left */
+  text-align: left;
 }
 
 .card-title {
-  font-size: 3rem; /* Makes the title significantly larger */
+  font-size: 3rem;
 }
 
 .date-posted,
 .card-text,
 .posted-by {
-  font-size: 1rem; /* Standardizes font size for consistency */
+  font-size: 1rem;
 }
 
 .left-align {
-  text-align: left; /* Aligns content to the left */
+  text-align: left;
 }
 
 .right-align {
-  text-align: right; /* Aligns content to the right */
+  text-align: right;
 }
 </style>

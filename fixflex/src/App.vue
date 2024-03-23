@@ -58,7 +58,7 @@
             aria-disabled="true"
             v-if="store.currentUser"
           >
-            {{ name }}</a
+            Welcome back {{ store.currentUser }}</a
           >
         </li>
       </ul>
@@ -105,11 +105,11 @@ firebase.auth().onAuthStateChanged((user) => {
     console.log("User logged in with", user.email);
     store.currentUser = user.email;
 
-    store.searchTerm = "l";
+    store.searchTerm = "";
   } else {
     console.log("user logged out");
     store.currentUser = null;
-    store.searchTerm = "ll";
+    store.searchTerm = "";
     if (router.name !== "login") {
       router.push({ name: "login" });
     }
@@ -140,7 +140,6 @@ export default {
   data() {
     return {
       store,
-      name: store.currentUser,
     };
   },
   methods: {
