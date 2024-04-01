@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <img src="@/assets/back.jpg" alt="" class="bg-img" />
+  <div class="background-container">
+    <img src="@/assets/back.png" alt="" class="bg-img" />
     <div class="flex-container">
       <div id="login" class="login-box">
         <h1>Prijavi se</h1>
@@ -13,7 +13,7 @@
               id="exampleInputEmail1"
               aria-describedby="emailHelp"
               placeholder="Enter
- email"
+  email"
             />
             <small id="emailHelp" class="form-text text-muted"
               >We'll never share your email with anyone else.</small
@@ -92,6 +92,10 @@ export default {
 </script>
 
 <style scoped>
+.background-container {
+  background-image: url("@/assets/back.png") !important;
+}
+
 .h1 {
   text-align: top;
 }
@@ -224,7 +228,7 @@ input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
-  -webkit-text-fill-color: white !important;
+  -webkit-text-fill-color: #35aafd !important;
 }
 
 @media only screen and (max-width: 600px) {

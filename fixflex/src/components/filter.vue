@@ -1,15 +1,26 @@
 <template>
-  <div class="card text-center">
-    <div class="card-header">{{ postedFromNow }}</div>
-    <div class="card-body p-0"></div>
-    <img class="card-img-top" />{{ info.header }}
-
-    <div class="card-footer text-body-secondary">{{ info.description }}</div>
-    <br />
-    <br />
+  <div class="price-filter">
+    <label for="priceRange">Price Range:</label>
+    <select v-model="priceRange" @change="applyFilter">
+      <option value="">All Prices</option>
+      <option value="lt200">Less than $200</option>
+      <option value="gt200">More than $200</option>
+    </select>
   </div>
 </template>
 
-<script></script>
-
-<style scoped></style>
+<script>
+export default {
+  name: "PriceFilter",
+  data() {
+    return {
+      priceRange: "",
+    };
+  },
+  methods: {
+    applyFilter() {
+      this.$emit("on-filter-change", this.priceRange);
+    },
+  },
+};
+</script>

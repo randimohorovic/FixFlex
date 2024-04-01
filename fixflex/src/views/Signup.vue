@@ -13,7 +13,7 @@
               id="exampleInputEmail1"
               aria-describedby="emailHelp"
               placeholder="Enter
-   email"
+  email"
             />
 
             <label>Email address</label>

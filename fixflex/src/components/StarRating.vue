@@ -33,10 +33,10 @@ export default {
 <style scoped>
 .star {
   cursor: pointer;
-  color: #cccccc; /* Gray stars by default */
+  color: #cccccc;
 }
 
 .rated {
-  color: #f5c518; /* Gold color for rated stars */
+  color: #f5c518;
 }
 </style>

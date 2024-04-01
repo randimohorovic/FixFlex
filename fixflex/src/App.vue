@@ -1,6 +1,14 @@
 <template>
   <nav id="nav" class="navbar navbar-expand-lg navbar-light bg-light">
-    <a id="logo" class="navbar-brand" href="/"> FixFlex </a>
+    <!-- <a id="logo" class="navbar-brand" href="/"> FixFlex </a> -->
+    <img
+      id="logo"
+      src="@/assets/logii.png"
+      alt="Fixflex"
+      class="navbar-logo"
+      href="/"
+    />
+
     <button
       class="navbar-toggler"
       type="button"
@@ -15,7 +23,7 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
+        <li v-if="store.currentUser" class="nav-item">
           <a class="nav-link"> <router-link to="/">Home</router-link> </a>
         </li>
         <li v-if="!store.currentUser" class="nav-item">
@@ -31,7 +39,7 @@
         <li v-if="store.currentUser" class="nav-item">
           <a href="#" @click.prevent="logout()" class="nav-link">Logout</a>
         </li>
-        <li class="nav-item dropdown">
+        <!--  <li class="nav-item dropdown">
           <a
             class="nav-link dropdown-toggle"
             href="#"
@@ -49,7 +57,7 @@
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="#">Something else here</a>
           </div>
-        </li>
+        </li> -->
         <li class="nav-item">
           <a
             class="nav-link disabled"
@@ -58,11 +66,13 @@
             aria-disabled="true"
             v-if="store.currentUser"
           >
-            Welcome back {{ store.currentUser }}</a
-          >
+            <router-link to="/edit-profile"
+              >Welcome back {{ store.currentUser }}</router-link
+            >
+          </a>
         </li>
       </ul>
-      <form class="form-inline my-2 my-lg-0">
+      <form v-if="store.currentUser" class="form-inline my-2 my-lg-0">
         <input
           v-model="store.searchTerm"
           id="search"
@@ -164,7 +174,8 @@ export default {
   text-align: center;
   color: #000000;
   background-color: #2e3234;
-  //background-image: url("@/assets/background.jpg");
+
+  min-height: 100vh;
 }
 
 #nav {
@@ -191,6 +202,11 @@ export default {
     background-color: #35aafd;
     border-color: #35aafd;
   }
+}
+.navbar-logo {
+  height: 30px; /* Or any other size */
+  width: auto;
+  /* Add other styling as needed */
 }
 #logo {
   &:hover {

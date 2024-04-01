@@ -80,37 +80,9 @@ import ListingJob from "@/components/Listing.vue";
 import store from "@/store";
 import { db } from "@/firebase.js";
 import { firebase } from "@/firebase.js";
+import PriceFilter from "@/components/filter.vue";
 
 let blok = ["ispis podatka varijable"];
-//prosljeduje info o url ali zelim prosljedit info gdje cu slat jedan objekt po objavi posla
-
-/* listing = [
-  {
-    header: "Majstor pločica",
-    description: "trazi se radnik (isto iz baze podaci)",
-    time: "iz baze vrijeme ",
-  },
-  {
-    header: "Majstor žbuke",
-    description: "trazi se radnik (isto iz baze podaci)#2",
-    time: "iz baze vrijeme ",
-  },
-  {
-    header: "Majstor centralnog grijanja",
-    description: "trazi se radnik (isto iz baze podaci)#3",
-    time: "iz baze vrijeme ",
-  },
-  {
-    header: "Majstor centralnog grijanja",
-    description: "trazi se radnik (isto iz baze podaci)#3",
-    time: "iz baze vrijeme ",
-  },
-  {
-    header: "Majstor žbuke",
-    description: "trazi se radnik (isto iz baze podaci)#2",
-    time: "iz baze vrijeme ",
-  },
-]; */
 
 export default {
   name: "HomeView",
@@ -124,6 +96,7 @@ export default {
       postHeader: "",
       postDescription: "",
       showModal: false,
+      PriceFilter,
     };
   },
 
@@ -216,37 +189,6 @@ export default {
         });
     },
 
-    /* postNewPost() {
-      console.log("ok");
-
-      const postHeader = this.postHeader;
-      const postDescription = this.postDescription;
-      const userEmail = this.store.currentUser;
-      const defaultRating = 0; // Default rating value
-
-      db.collection("posts")
-        .add({
-          header: postHeader,
-          desc: postDescription,
-          userEmail: userEmail,
-          user: store.currentUser,
-          posted_at: Date.now(), //postoji u js bez imprtanja
-          rating: defaultRating, // Include the rating when creating a new post
-          ratingsSum: 0, // suma ratinga
-          ratingsCount: 0, // broj ratinga oderedenog posta
-        })
-        .then((doc) => {
-          console.log("spremljeno", doc);
-          this.postHeader = "";
-          this.postDescription = "";
-          alert("Uspješna objava");
-          this.getposts();
-          this.hideNewPostDialog(); // Closes the modal after posting
-        })
-        .catch((e) => {
-          console.error(e);
-        });
-    }, */
     showNewPostDialog() {
       this.showModal = true;
     },
