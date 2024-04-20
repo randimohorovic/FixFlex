@@ -1,7 +1,7 @@
 <template>
   <!-- cards -->
   <div class="row">
-    <div class="col-3">filtri/linkovi</div>
+    <div class="col-3"></div>
     <div class="col-7">
       <div class="container mt-5 new-post-button">
         <!-- <h2>Nova objava</h2> -->
@@ -10,7 +10,7 @@
           type="button"
           class="btn btn-primary"
         >
-          New post
+          Nova objava
         </button>
       </div>
 
@@ -69,7 +69,7 @@
       />
       <!-- x element u data- jobs:, key: "x"pozivas vrijednost x el. :x to prima javascript taj jednako ako bi bio nesto unique onda.id ili...  -->
     </div>
-    <div class="col-2">empty - blok {{ ispis }} {{ store.searchTerm }}</div>
+    <div class="col-2"></div>
   </div>
 </template>
 
@@ -173,12 +173,12 @@ export default {
                 console.log("Post saved successfully", docRef.id);
                 this.postHeader = "";
                 this.postDescription = "";
-                alert("Successful post!");
+                alert("Uspješna objava!");
                 this.getposts(); // refresham cjelu listu posta
                 this.hideNewPostDialog();
               })
               .catch((e) => {
-                console.error("Error creating post:", e);
+                console.error("Greška prilikom ispunjavanja polja!", e);
               });
           } else {
             console.error("User profile does not exist.");

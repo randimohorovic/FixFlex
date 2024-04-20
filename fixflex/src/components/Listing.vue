@@ -1,13 +1,13 @@
 <template>
   <div class="card text-center">
-    <div class="card-header left-align">Posted {{ postedFromNow }}</div>
+    <div class="card-header left-align">Objavljeno {{ postedFromNow }}</div>
     <div class="card-body">
       <h5 class="card-title left-align">{{ info.header }}</h5>
       <p class="date-posted left-align"></p>
       <p class="card-text left-align">{{ info.description }}</p>
-      <p class="posted-by right-align">Posted by: {{ info.username }}</p>
-      <p class="posted-by right-align">Rating: {{ averageRating }}</p>
-      <p class="posted-by right-align">User email: {{ info.userEmail }}</p>
+      <p class="posted-by right-align">Kreirao: {{ info.username }}</p>
+      <p class="posted-by right-align">Recenzija: {{ averageRating }}</p>
+      <p class="posted-by right-align">Email korisnika: {{ info.userEmail }}</p>
       <StarRating
         :initialRating="info.rating"
         @rating-selected="handleRatingSelected"
@@ -26,11 +26,11 @@ export default {
       if (this.info.ratingsCount) {
         return (this.info.ratingsSum / this.info.ratingsCount).toFixed(1);
       } else {
-        return "No ratings yet";
+        return "Nema recenzija";
       }
     },
     postedFromNow() {
-      return moment(this.info.time).format("DD.MM.YYYY [at] HH:mm");
+      return moment(this.info.time).format("DD.MM.YYYY [u] HH:mm");
     },
   },
   components: {

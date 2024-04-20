@@ -24,20 +24,22 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li v-if="store.currentUser" class="nav-item">
-          <a class="nav-link"> <router-link to="/">Home</router-link> </a>
-        </li>
-        <li v-if="!store.currentUser" class="nav-item">
           <a class="nav-link">
-            <router-link to="/login">Login</router-link>
+            <router-link to="/">Početna stranica</router-link>
           </a>
         </li>
         <li v-if="!store.currentUser" class="nav-item">
           <a class="nav-link">
-            <router-link to="/signup">Signup</router-link>
+            <router-link to="/login">Prijava</router-link>
+          </a>
+        </li>
+        <li v-if="!store.currentUser" class="nav-item">
+          <a class="nav-link">
+            <router-link to="/signup">Registracija</router-link>
           </a>
         </li>
         <li v-if="store.currentUser" class="nav-item">
-          <a href="#" @click.prevent="logout()" class="nav-link">Logout</a>
+          <a href="#" @click.prevent="logout()" class="nav-link">Odjava</a>
         </li>
         <!--  <li class="nav-item dropdown">
           <a
@@ -67,7 +69,7 @@
             v-if="store.currentUser"
           >
             <router-link to="/edit-profile"
-              >Welcome back {{ store.currentUser }}</router-link
+              >Dobrodošli {{ store.currentUser }}</router-link
             >
           </a>
         </li>
@@ -78,7 +80,7 @@
           id="search"
           class="form-control mr-sm-2"
           type="search"
-          placeholder="Search"
+          placeholder="Pretraživanje"
           aria-label="Search"
         />
         <button
@@ -86,7 +88,7 @@
           class="btn btn-outline-success my-2 my-sm-0"
           type="submit"
         >
-          Search
+          Pretraživanje
         </button>
       </form>
     </div>

@@ -1,9 +1,9 @@
 <template>
   <div>
-    <h2>Edit Profile</h2>
+    <h2>Uredi profil</h2>
     <form @submit.prevent="updateUsername">
-      <input v-model="username" placeholder="Enter your username" />
-      <button type="submit">Save Username</button>
+      <input v-model="username" placeholder="Unesi korisničo ime" />
+      <button type="submit">Spremi</button>
     </form>
   </div>
 </template>
@@ -34,7 +34,7 @@ export default {
           )
           .then(() => {
             console.log("Username updated successfully!");
-            alert("Username updated successfully!");
+            alert("Korisničko ime uspješno ažurirano!");
           })
           .catch((error) => {
             console.error("Error updating username: ", error);
@@ -88,8 +88,9 @@ button {
   transition: background-color 0.3s;
 }
 
-button:hover {
+button.hover {
   background-color: #1e90ff;
 
-background-color: #2e3234;
+  background-color: #2e3234;
+}
 </style>
